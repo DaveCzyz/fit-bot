@@ -10,10 +10,10 @@ Sentry.init({
     tracesSampleRate: 1.0,
 });
 
-const useSentry = () => {
+const useSentry = (level = 'warning') => {
     const sendLog = (e) => {
         try {
-            Sentry.captureMessage(e);
+            Sentry.captureMessage(e, level);
         } catch (err) {
             console.warn(err);
         }
