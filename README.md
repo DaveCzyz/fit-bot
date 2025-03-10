@@ -1,2 +1,2 @@
-# fit-bot
+# fit-bot 2.0
 
