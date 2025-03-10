@@ -11,12 +11,15 @@ Sentry.init({
 });
 
 const useSentry = (level = 'warning') => {
-    const sendLog = (e) => {
-        try {
-            Sentry.captureMessage(e, level);
-        } catch (err) {
-            console.warn(err);
-        }
+    const sendLog = async (e) => {
+        return new Promise((resolve, reject) => {
+            try {
+                const log = Sentry.captureMessage(e, level);
+                resolve(`Error log: ${log}`);
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 
     return {

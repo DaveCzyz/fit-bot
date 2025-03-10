@@ -160,7 +160,7 @@ const callConfirmation = async (paymentId) => {
         });
     } catch (e) {
         console.log('Error callConfirmation:', e);
-        sendLog(`Error callConfirmation: ${e}`);
+        await sendLog(`Error callConfirmation: ${e}`);
     }
 };
 
@@ -191,12 +191,18 @@ const callRegister = async () => {
         });
     } catch (e) {
         console.log('Error callRegister:', e.message);
-        sendLog(`Error callRegister: ${e}`);
+        await sendLog(`Error callRegister: ${e}`);
     }
 };
 
 const callAsync = async () => {
-    if (counter >= 100) return false;
+    if (counter >= 100) {
+        await sendLog('Osiągnięto maksymalną liczbe zapytań dla callAsync')
+            .then((e) => {
+                console.log(e);
+        });
+        return false;
+    }
 
     counter++;
     console.log(`Próba numer: ${counter}`);
@@ -231,7 +237,7 @@ const callAsync = async () => {
         }
     } catch (error) {
         console.error('Error callAsync:', error);
-        sendLog(`Error callAsync: ${error}`);
+        await sendLog(`Error callAsync: ${error}`);
     }
 }
 
